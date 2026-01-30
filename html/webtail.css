@@ -26,15 +26,24 @@ th, td {
 }
 
 .content {
-  width:99%;
+  width:100%;
   min-height:300px;
 }
 
+
+#mask {
+  width: 200px;
+}
+
 .data {
-  width: 99vw;
+  width: 100vw;
   font-family: monospace;
   padding-top:38px;
   padding-bottom:12px;
+}
+
+.data span {
+  width: 100%;
 }
 
 .top {

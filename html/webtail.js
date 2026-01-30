@@ -221,7 +221,7 @@ function processLine(l) {
 function processLog(data) {
     var $area = $('#tail-data');
     var str = (data !== undefined) ? data : '';
-    var container = document.createElement("span");
+    var container = document.createElement("div");
     var text = document.createTextNode(str);
     container.appendChild(text);
     var mask = $('#mask').val();
