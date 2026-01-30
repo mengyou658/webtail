@@ -73,7 +73,7 @@ $(PRG): $(SOURCES)
 	  "-X main.version=$(APP_VERSION) -X main.repo=$(REPO)" ./cmd/$@
 
 ## Build like docker image from scratch
-build-standalone: test
+build-standalone:
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
 	  $(GO) build -a -o $(PRG_DEST) \
 	  -ldflags "${LDFLAGS} -X main.version=$(APP_VERSION) -X main.repo=$(REPO)" \

@@ -221,27 +221,23 @@ function processLine(l) {
 function processLog(data) {
     var $area = $('#tail-data');
     var str = (data !== undefined) ? data : '';
+    var container = document.createElement("span");
+    var text = document.createTextNode(str);
+    container.appendChild(text);
     var mask = $('#mask').val();
-    var container;
-    if (mask === '') {
-        container = document.createTextNode(str)
-    } else {
-        container = document.createElement("span");
-        var text = document.createTextNode(str);
-        container.appendChild(text);
-        if (str.search($('#mask').val()) !== -1) {
-            container.style.color = "red";
+    if (!mask || str.search(mask) > -1) {
+        // container.style.color = "red";
+        $area.append(container);
+        $area.append("<br />");
+        if (!WebTail.focused) {
+            titleUnread(++WebTail.unread);
+        }
+        if (!WebTail.wait) {
+            setTimeout(updateScroll, WebTail.every);
+            WebTail.wait = true;
         }
     }
-    $area.append(container);
-    $area.append("<br />");
-    if (!WebTail.focused) {
-        titleUnread(++WebTail.unread);
-    }
-    if (!WebTail.wait) {
-        setTimeout(updateScroll, WebTail.every);
-        WebTail.wait = true;
-    }
+
 
 }
 

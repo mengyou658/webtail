@@ -26,12 +26,12 @@ th, td {
 }
 
 .content {
-  width:95%;
+  width:99%;
   min-height:300px;
 }
 
 .data {
-  width: 95vw;
+  width: 99vw;
   font-family: monospace;
   padding-top:38px;
   padding-bottom:12px;
