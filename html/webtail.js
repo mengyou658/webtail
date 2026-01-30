@@ -222,11 +222,25 @@ function processLog(data) {
     var $area = $('#tail-data');
     var str = (data !== undefined) ? data : '';
     var container = document.createElement("div");
-    var text = document.createTextNode(str);
-    container.appendChild(text);
     var mask = $('#mask').val();
-    if (!mask || str.search(mask) > -1) {
-        // container.style.color = "red";
+    
+    if (mask && str.search(mask) > -1) {
+        // Split text and highlight mask in red
+        var parts = str.split(mask);
+        for (var i = 0; i < parts.length; i++) {
+            // Add normal text
+            if (parts[i]) {
+                container.appendChild(document.createTextNode(parts[i]));
+            }
+            // Add highlighted mask if not last part
+            if (i < parts.length - 1) {
+                var highlight = document.createElement("span");
+                highlight.style.color = "red";
+                highlight.appendChild(document.createTextNode(mask));
+                container.appendChild(highlight);
+            }
+        }
+
         $area.append(container);
         $area.append("<br />");
         if (!WebTail.focused) {
