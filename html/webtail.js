@@ -240,7 +240,12 @@ function processLog(data) {
                 container.appendChild(highlight);
             }
         }
+    } else {
+        container.appendChild(document.createTextNode(str));
+    }
 
+    var filterFlag = $('#filterFlag').is(":checked");
+    if (!mask || str.search(mask) > -1 || !filterFlag) {
         $area.append(container);
         $area.append("<br />");
         if (!WebTail.focused) {
@@ -251,7 +256,6 @@ function processLog(data) {
             WebTail.wait = true;
         }
     }
-
 
 }
 
