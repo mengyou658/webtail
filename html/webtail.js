@@ -246,6 +246,14 @@ function processLog(data) {
 
     var filterFlag = $('#filterFlag').is(":checked");
     if (!mask || str.search(mask) > -1 || !filterFlag) {
+        // Check current line count and remove oldest line if over limit
+        var maxLines = 1500;
+        var currentLines = $area.find('div').length;
+        if (currentLines >= maxLines) {
+            $area.find('div:first').remove();
+            $area.find('br:first').remove();
+        }
+        
         $area.append(container);
         $area.append("<br />");
         if (!WebTail.focused) {
@@ -286,6 +294,11 @@ $(function() {
     titleReset();
 
     $('#flag').click(function() {
+        var obj = bodyOrHtml();
+        obj.scrollTop = obj.scrollHeight;
+    });
+    $('#filterFlag').on('change', function() {
+        WebTail.scrolled = false; // user scrolls up - switch autoscroll off
         var obj = bodyOrHtml();
         obj.scrollTop = obj.scrollHeight;
     });
